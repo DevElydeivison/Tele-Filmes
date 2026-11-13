@@ -2,51 +2,75 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tele Filmes</title>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090d18" />
+  <meta name="description" content="Encontre, explore e salve seus filmes e séries favoritos no TeleFilmes." />
+  <title>TeleFilmes — descubra sua próxima história</title>
+  <link rel="shortcut icon" href="assets/icon.png" type="image/png" />
+  <link rel="preconnect" href="https://www.omdbapi.com" />
+  <link rel="preconnect" href="https://m.media-amazon.com" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="TeleFilmes - início">
+        <span class="brand-mark">T<span>F</span></span>
+        <span>tele<span class="brand-accent">filmes</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="nav-link active" id="homeBtn" type="button">Explorar</button>
+        <button class="nav-link" id="favoritesBtn" type="button">Minha lista <span id="favoritesCount" class="nav-count">0</span></button>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ativar tema claro" title="Alternar tema"><span id="themeIcon">☀</span></button>
+    </header>
 
-  <header class="header">
-    <h1>🎬 Tele Filmes</h1>
-    <p>Encontre aqui o seu filme favorito:</p>
-  </header>
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-content">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> SEU PRÓXIMO PLAY COMEÇA AQUI</span>
+          <h1>Histórias incríveis.<br /><span>À sua descoberta.</span></h1>
+          <p>Explore filmes e séries, encontre novos favoritos e monte sua própria coleção.</p>
+          <form class="search-form" id="searchForm" role="search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="Busque em português ou pelo título original..." autocomplete="off" aria-label="Buscar filmes e séries" />
+            <button id="searchBtn" type="submit">Buscar <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="search-hint">Dica: busque por “O Poderoso Chefão”, “Vingadores” ou “Interestelar”.</p>
+        </div>
+        <div class="hero-decoration" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-clapper">▶</div><span class="decor-star star-one">✦</span><span class="decor-star star-two">✧</span></div>
+      </section>
 
-  <main class="container">
+      <section class="catalog-section" aria-labelledby="sectionTitle">
+        <div class="section-heading">
+          <div><span class="section-kicker">CATÁLOGO</span><h2 id="sectionTitle">Explore títulos</h2><p id="resultsDescription">Encontre algo novo para assistir hoje.</p></div>
+          <div class="view-label"><span class="live-dot"></span> Busca atualizada em tempo real</div>
+        </div>
 
-    <!-- Barra de Busca -->
-    <section class="search-section">
-      <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Buscar filmes (ex: Batman, Avengers...)"
-      />
-      <button id="searchBtn">Buscar</button>
-    </section>
+        <p class="filters-hint" id="filtersHint" aria-live="polite">Pesquise um título para liberar os filtros.</p>
+        <div class="filters filters-disabled" id="filtersPanel">
+          <label class="filter-field"><span>Ano de lançamento</span><input id="yearFilter" type="number" min="1900" max="2099" placeholder="Ex.: 2024" /></label>
+          <label class="filter-field"><span>Tipo de conteúdo</span><select id="typeFilter"><option value="all">Todos os tipos</option><option value="movie">Filmes</option><option value="series">Séries</option><option value="episode">Episódios</option></select></label>
+          <button class="clear-filters" id="clearFilters" type="button">Limpar filtros <span>↺</span></button>
+        </div>
 
-    <!-- Loader -->
-    <section id="loader" class="loader hidden">
-      <div class="spinner"></div>
-      <p>Buscando filmes...</p>
-    </section>
+        <div id="loader" class="loader hidden" role="status" aria-live="polite"><span class="spinner"></span><span>Procurando boas histórias...</span></div>
+        <div id="emptyState" class="empty-state"><div class="empty-icon">✦</div><h3>O que vamos assistir?</h3><p>Digite o nome de um filme ou série para começar sua descoberta.</p></div>
+        <div id="moviesContainer" class="movies-grid" aria-live="polite"></div>
+      </section>
+    </main>
 
-    <!-- Resultados -->
-    <section id="moviesContainer" class="movies-grid"></section>
+    <footer class="footer"><a class="footer-brand" href="#inicio">tele<span>filmes</span></a><p>Feito para quem ama boas histórias.</p><div>Desenvolvido por <a href="https://www.linkedin.com/in/elydeivisoncesar/" target="_blank" rel="noopener noreferrer">Elydeivison Cesar</a> · <a href="https://github.com/DevElydeivison" target="_blank" rel="noopener noreferrer">@DevElydeivison</a></div></footer>
+  </div>
 
-  </main>
-
-  <footer class="footer">
-    <p>
-  Desenvolvido por 
-  <a href="https://www.linkedin.com/in/elydeivisoncesar/" target="_blank" rel="noopener noreferrer">
-    Elydeivison Cesar
-  </a>  🚀 | <a href="https://github.com/DevElyShow" target="_blank" rel="noopener noreferrer">@DevElyShow</a> 
-</p>
-  </footer>
+  <dialog class="movie-dialog" id="movieModal" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" type="button" aria-label="Fechar detalhes">×</button>
+    <div id="modalBody" class="modal-body"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="./js/api.js"></script>
+  <script src="./js/storage.js"></script>
   <script src="./js/ui.js"></script>
   <script src="./js/main.js"></script>
 </body>
