@@ -8,7 +8,7 @@ Uma experiência moderna para explorar filmes e séries, pesquisar títulos e or
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black) ![Responsive](https://img.shields.io/badge/Responsive-Mobile%20First-9AE62B)
 
-[GitHub do desenvolvedor](https://github.com/DevElyShow) · [LinkedIn](https://www.linkedin.com/in/elydeivisoncesar/)
+[GitHub do desenvolvedor](https://github.com/DevElydeivison) · [LinkedIn](https://www.linkedin.com/in/elydeivisoncesar/)
 
 </div>
 
